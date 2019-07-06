@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LINEBOT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <style>
+        .mc {
+            width: 1000px;
+            min-height: 300px;
+            margin:  0 auto;
+        }
+        .form {
+            padding: 1em;
+        }
+        @media screen and (max-width: 480px) {
+            .mc {
+                width: 90%;
+                margin: 0 auto;
+            }
+        }
+    </style>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">質問箱?</a>
+            </div>
+        </nav>
+    </header>
+    <main class="mc">
+        <section class="form row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">mode_edit</i>
+                <input placeholder="your name" type="text" class="validate name" value="齋藤飛鳥(仮)" data-length="20">
+            </div>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="icon_prefix2" class="materialize-textarea text" name="text" data-length="280" placeholder="なんでもどうぞ"></textarea>
+            </div>
+
+            <button class="btn waves-effect waves-light submit" type="submit" name="action">Submit
+                <i class="material-icons right ">send</i>
+            </button>
+
+        </section>
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                  <h5 class="white-text">ふっけにLINEを送るだけ</h5>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+              
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $('.name').characterCounter();
+        $('.text').characterCounter();
+        $('.submit').prop('disabled', true);
+
+        $('.text').on('keyup', () => {
+            if($('.text').val().length > 280  || !$('.text').val().length || !$('.name').val().length || $('.name').val().length > 20) {
+                $('.submit').prop('disabled', true);
+            } else {
+                $('.submit').prop('disabled', false);
+            }
+        });
+        $('.name').on('keyup', () => {
+            if(!$('.name').val().length || $('.name').val().length > 20 || !$('.text').val().length || $('.text').val().length > 280) {
+                $('.submit').prop('disabled', true);
+            } else {
+                $('.submit').prop('disabled', false);
+            }
+        });
+        
+        $('.submit').on('click', () => {
+            // $.get('http://localhost:3000/line', { text: $('.text').val(), name: $('.name').val() })
+            $.get('https://fdf17495.ngrok.io/line', { text: $('.text').val(), name: $('.name').val() })
+            .done(data => {
+                $('.text').val('');
+                $('.submit').prop('disabled', true);
+                M.toast({html: '送信成功!!'});
+            })
+            .fail(() => {
+                M.toast({html: '失敗!!'});
+            })
+        });
+    </script>
+</body>
+</html>
