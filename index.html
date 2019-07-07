@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LINEBOT</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@fukke0906">
+    <meta property="og:url" content="https://fukekazki.github.io/Question_Box/">
+    <meta property="og:title" content="自作質問箱">
+    <meta property="og:description" content="なんでもどうぞ">
+    <meta property="og:image" content="">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -87,7 +94,7 @@
         
         $('.submit').on('click', () => {
             // $.get('http://localhost:3000/line', { text: $('.text').val(), name: $('.name').val() })
-            $.get('https://fdf17495.ngrok.io/line', { text: $('.text').val(), name: $('.name').val() })
+            $.get('https://8dbf4993.ngrok.io/line', { text: $('.text').val(), name: $('.name').val() })
             .done(data => {
                 $('.text').val('');
                 $('.submit').prop('disabled', true);
